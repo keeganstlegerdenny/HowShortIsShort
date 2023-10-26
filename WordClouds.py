@@ -4,16 +4,7 @@ import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 import os
 
-# Word cloud of Corpus 6 with 40 topics
 
-with open('/Users/keeganstlegerdenny/Documents/Postgraduate/ResearchReport/Code/CreateCorp2/Cor6b.txt', 'r') as file:
-    d40 = file.read().replace('\n', '')
-    
-wc2 = WordCloud(max_words=150,background_color='white',colormap='summer_r').generate(d40)
-plt.figure()
-plt.imshow(wc2, interpolation="bilinear")
-plt.axis("off")
-plt.show()
 
 # Word clouds for all topics
 
