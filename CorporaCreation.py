@@ -13,13 +13,6 @@ import random
 import pandas as pd
 import gensim
 from gensim import corpora, models
-import gsdmm
-from gsdmm import MovieGroupProcess
-from gensim.models import CoherenceModel
-from wordcloud import WordCloud
-from GPyM_TM import GSDMM
-from gensim.test.utils import common_corpus, common_dictionary
-from gensim.corpora import Dictionary
 import math
 import os
 
@@ -35,6 +28,7 @@ punctuation = list(punctuation)
 
 stemmer = WordNetLemmatizer()
 
+# Data cleaning function
 def clean(ss):
     
      newdoc = []
@@ -72,6 +66,7 @@ def clean(ss):
          
      return ds, wordcount, ts, alllens, newdoc, topn, tokens
 
+# 39 topics
 topics = ['Academic disciplines', 'Business', 'Communication', 'Concepts', 'Culture', 'Economy', 'Education', 'Energy',
 'Engineering', 'Entertainment', 'Entities', 'Ethics', 'Food and drink', 'Geography', 'Government', 'Health',
 'History', 'Human behavior', 'Humanities', 'Information', 'Internet', 'Knowledge', 'Language', 'Law', 'Life‎',
@@ -88,7 +83,7 @@ for l in topics:
     
     tn = tn+1
     
-    tops = wikipedia.search(l, results=50)
+    tops = wikipedia.search(l, results=50) # Take first 50 results
 
     for i in tops:
         
@@ -109,74 +104,24 @@ for l in topics:
         test = nltk.sent_tokenize(document)
 
         stemmer = WordNetLemmatizer()
-    
-        ci = ' '.join(test[0:180])
+
+        ci = ' '.join(test[0:5]) # Change depending on how many sentences
         ci = clean(ci)[4][0]          
         cs.append(ci)
-        
+
+# Some statistics for the data
 cssplit = [d.split() for d in cs]
 cslen = [len(i) for i in cssplit]
 csmean = np.mean(cslen)
 plt.hist(cslen)
 np.percentile(cslen,75)
 lamml = [min(cslen), max(cslen), np.mean(cslen), np.std(cslen)]
-
-
-for i in range(0,1944):
-    cilen = round(cslen[i]/(3/2))
-    cs[i] = ' '.join(cs[i].split()[0:cilen])
     
 cs = [' '.join(i) for i in cs]
 
 # Creating corpus
 os.chdir('/Users/keeganstlegerdenny/Documents/Postgraduate/ResearchReport/Code/CreateCorp2')
-with open('LargeCor4.txt', 'a') as f:
+with open('LargeCor4.txt', 'a') as f: # Change name if new corpus
     for line in cs:
         f.write(line)
         f.write('\n')
-        
-# Running the model
-
-dl = open('LargeCor4.txt')
-dl = [d.split() for d in dl]
-cl = [len(i) for i in dl]
-lamml = [min(cl), max(cl), np.mean(cl), np.std(cl)]
-
-## GPYPM implementation
-
-def modelGSDMM(corp, nt, ni):
-    
-    data_dmm = GSDMM.DMM(corp, nTopics=nt, iters=ni, nTopWords=10, beta=0.01)
-
-    data_dmm.topicAssigmentInitialise()
-    data_dmm.inference()
-
-    psi, theta, selected_psi, selected_theta = data_dmm.worddist()
-   
-    finalAssignments = data_dmm.writeTopicAssignments()
-
-    coherence_topwords = data_dmm.writeTopTopicalWords(finalAssignments)
-
-    score = data_dmm.coherence(coherence_topwords, len(finalAssignments))
-    
-    return coherence_topwords, score, psi, theta, finalAssignments
-
-
-mLc3=modelGSDMM(dl,40,15)
-mLc3mc=mLc3[1]
-
-mcs = np.zeros((3,1))
-meancs = np.zeros((1,1))
-mtws = []
-
-for i in range(0,3):
-    
-    m = modelGSDMM(dl,40,15)
-    mc = m[1]
-    mcs[i] = mc
-        
-    mtws.append([tw for tw in m[0]])
-
-meancs = np.mean(mcs)
-
-        
