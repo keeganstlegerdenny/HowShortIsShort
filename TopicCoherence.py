@@ -2,9 +2,7 @@ import math
 import numpy as np
 import os
 import matplotlib.pyplot as plt
-import bitermplus as btm
 import pandas as pd
-from matplotlib.transforms import Affine2D
 
 cortest = 'c1'
 tststs = cortest+'.topwords'
@@ -30,23 +28,6 @@ cl3 = open('LargeCor3.txt')
 ds.append([d.split() for d in cl3])
 cl4 = open('LargeCor4.txt')
 ds.append([d.split() for d in cl4])
-
-"""
-c1 = open('Cor1b.txt')
-d1 = [d.split() for d in c1]
-c2 = open('Cor2b.txt')
-d2 = [d.split() for d in c2]
-c3 = open('Cor3b.txt')
-d3 = [d.split() for d in c3]
-c4 = open('Cor4b.txt')
-d4 = [d.split() for d in c4]
-c5 = open('Cor5b.txt')
-d5 = [d.split() for d in c5]
-c6 = open('Cor6b.txt')
-d6 = [d.split() for d in c6]
-
-ds = [d1,d2,d3,d4,d5,d6]
-"""
 
 # Change current directory to get top words
 os.chdir('/Users/keeganstlegerdenny/Documents/Postgraduate/ResearchReport/Code/results')
@@ -118,59 +99,6 @@ for i in range(0,4):
             runs.append(ind)
             
         apmi2[i][k] = runs
-            
-
-
-"""
-# All LDA
-LDA1 = open('c1LDA40.topWords')
-LDA1 = [d.split() for d in LDA1]
-LDA2 = open('c2LDA40.topWords')
-LDA2 = [d.split() for d in LDA2]
-LDA3 = open('c3LDA40.topWords')
-LDA3 = [d.split() for d in LDA3]
-LDA4 = open('c4LDA40.topWords')
-LDA4 = [d.split() for d in LDA4]
-LDA5 = open('c5LDA40.topWords')
-LDA5 = [d.split() for d in LDA5]
-LDA6 = open('c6LDA40.topWords')
-LDA6 = [d.split() for d in LDA6]
-
-LDAS = [LDA1,LDA2,LDA3,LDA4,LDA5,LDA6]
-
-
-# All BTM
-BTM1 = open('c1BTM40.topWords')
-BTM1 = [d.split() for d in BTM1]
-BTM2 = open('c2BTM40.topWords')
-BTM2 = [d.split() for d in BTM2]
-BTM3 = open('c3BTM40.topWords')
-BTM3 = [d.split() for d in BTM3]
-BTM4 = open('c4BTM40.topWords')
-BTM4 = [d.split() for d in BTM4]
-BTM5 = open('c5BTM40.topWords')
-BTM5 = [d.split() for d in BTM5]
-BTM6 = open('c6BTM40.topWords')
-BTM6 = [d.split() for d in BTM6]
-
-BTMS = [BTM1,BTM2,BTM3,BTM4,BTM5,BTM6]
-
-# All GPU
-GPU1 = open('c1GPU40.topWords')
-GPU1 = [d.split() for d in GPU1]
-GPU2 = open('c2GPU40.topWords')
-GPU2 = [d.split() for d in GPU2]
-GPU3 = open('c3GPU40.topWords')
-GPU3 = [d.split() for d in GPU3]
-GPU4 = open('c4GPU40.topWords')
-GPU4 = [d.split() for d in GPU4]
-GPU5 = open('c5GPU40.topWords')
-GPU5 = [d.split() for d in GPU5]
-GPU6 = open('c6GPU40.topWords')
-GPU6 = [d.split() for d in GPU6]
-
-GPUS = [GPU1,GPU2,GPU3,GPU4,GPU5,GPU6]
-"""
 
 # Function for UMASS
 def gch(cp,tpw):
@@ -213,13 +141,6 @@ for j in range(0,4): # Model
             
         allch[j][i] = chk
 
-"""
-allch.append([[-39.6587,-41.4597,-42.4704], [-41.7674,-39.5738,-40.3185], [-39.9997,-41.9912,-41.7366], 
-              [-39.913,-40.0562,-39.4353], [-38.978,-40.1816,-38.2071], [-38.553,-38.2077,-37.8107], 
-              [-34.9734,-35.5518,-36.108], [-35.9981,-34.8726,-34.0047]])
-"""
-
-
 means = []
 maxes = []
 mins = []
@@ -235,14 +156,6 @@ for i in range(0,4):
     maxdiffs.append([abs(np.max(a)-np.mean(a)) for a in allch[i]])
     mindiffs.append([abs(np.min(a)-np.mean(a)) for a in allch[i]])
 
-
-# Getting PMI
-os.chdir('/Users/keeganstlegerdenny/Documents/Postgraduate/ResearchReport/Code/results')
-
-
-
-models = ['LDA','BTM','GPU','DMM']
-
 # seeing the top words for each model on each corpus
 def gtw(m,c,r):
     itw = atw[m][c][r]
@@ -254,10 +167,6 @@ def gtw(m,c,r):
 gtw(0,0,2)
 
 # Graph for UMASS
-#003f5c
-#7a5195
-#ef5675
-#ffa600
 
 x = range(1,11)
 fig, ax = plt.subplots()
@@ -283,20 +192,7 @@ plt.savefig('Poster_UMASS.png', dpi=300, bbox_inches='tight')
 #plt.savefig('UMASS_with_8_Corpora.png', dpi=300, bbox_inches='tight')
 plt.show()
 
-
 # Graph for PMI
-
-"""
-pmi = np.transpose([[0.6448,0.8665,1.0232,0.9795],
-                    [0.6302,0.9521,0.9649,0.9992],
-                    [0.5425,0.8820,0.9111,0.9200],
-                    [0.5227,0.7401,0.8170,0.9096],
-                    [0.4866,0.7692,0.7562,0.8882],
-                    [0.4867,0.8094,0.6832,0.8568],
-                    [0.5623,0.7251,0.6362,0.5629],
-                    [0.5513,0.5655,0.4959,0.4514],
-                    [0.6790,0.5832,0.6939,0.5810]])
-"""
 
 pmi = apmi2
 
@@ -314,9 +210,7 @@ for i in range(0,4):
     pmins.append([np.min(a) for a in pmi[i]])
     pmaxdiffs.append([abs(np.max(a)-np.mean(a)) for a in pmi[i]])
     pmindiffs.append([abs(np.min(a)-np.mean(a)) for a in pmi[i]])
-
-“#7eb0d5”, “#b2e061”, “#bd7ebe”, “#ffb55a”
-
+    
 x = range(1,11)
 fig, ax = plt.subplots()
 # LDA
@@ -341,6 +235,3 @@ os.chdir('/Users/keeganstlegerdenny/Documents/Postgraduate/ResearchReport/Figure
 plt.savefig('Poster_PMI.png', dpi=300, bbox_inches='tight')
 #plt.savefig('PMI_with_8_Corpora.png', dpi=300, bbox_inches='tight')
 plt.show()
-
-
-pmipaste = list(np.around(np.array(np.transpose(pmeans)),4))
