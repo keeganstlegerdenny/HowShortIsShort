@@ -4,7 +4,7 @@ We conducted research to estimate an upper bound for short text lengths in short
 
 [Corpus 1](www.google.com) <br/>
 [Corpus 2](https://github.com/keeganstlegerdenny/HowShortIsShort/blob/Top-Words/C2.md) <br/>
-[Corpus 3](www.google.com) <br/>
+[Corpus 3](https://github.com/keeganstlegerdenny/HowShortIsShort/blob/Top-Words/C3.md) <br/>
 [Corpus 4](www.google.com) <br/>
 [Corpus 5](www.google.com) <br/>
 [Corpus 6](www.google.com) <br/>
