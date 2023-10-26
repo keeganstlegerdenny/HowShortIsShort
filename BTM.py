@@ -25,7 +25,7 @@ ds.append(cl2.readlines())
 cl3 = open('LargeCor3.txt')
 ds.append(cl3.readlines())
 
-
+# Function for BTM
 def btmfun(dl,i):
     
     # PREPROCESSING
@@ -67,6 +67,7 @@ btmtw = [[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]
 ri = ['','a','b']
 mn = ['c1','c2','c3','c4','c5','c6','Lc','Lc2','Lc3']
 
+# Saving top words
 for mi in range(0,9):
     
     ri = ['a','b','c']
@@ -106,7 +107,4 @@ for i in range(0,2):
         for line in btm_tw_Lc4:
             line = ' '.join(line)
             f.write(line)
-            f.write('\n')
-    
-
-    
+            f.write('\n')   
