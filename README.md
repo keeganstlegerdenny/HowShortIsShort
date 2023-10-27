@@ -4,7 +4,7 @@ We conducted research to estimate an upper bound for short text lengths in short
 
 ## Data
 
-We include word clouds [here](https://github.com/keeganstlegerdenny/HowShortIsShort/blob/main/WordClouds.md) for each of the 39 topics used to create the data. A list of the datasets is included below. Clicking on each provides the top words for the best and worst performing model for that corpus.
+We include word clouds [here](https://github.com/keeganstlegerdenny/HowShortIsShort/blob/main/WordClouds.md) for each of the 39 topics used to create the data. A list of the datasets is included below. Clicking on each link provides the top words for the best and worst performing model for that corpus.
 
 [Corpus 1](https://github.com/keeganstlegerdenny/HowShortIsShort/blob/main/C1.md) <br/>
 [Corpus 2](https://github.com/keeganstlegerdenny/HowShortIsShort/blob/main/C2.md) <br/>
